@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>0fcc891f-17be-4783-a480-5d5d0cb2ba2c</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.0.16" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.16" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Expect.Bookmuse.Data\Expect.Bookmuse.Data.csproj" />
+    <ProjectReference Include="..\Expect.Bookmuse.Domain\Expect.Bookmuse.Domain.csproj" />
+    <ProjectReference Include="..\Expect.Bookmuse.Infrastructure\Expect.Bookmuse.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

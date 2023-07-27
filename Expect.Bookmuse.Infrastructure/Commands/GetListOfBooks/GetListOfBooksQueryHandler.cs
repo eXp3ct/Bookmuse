@@ -9,12 +9,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Expect.Bookmuse.Infrastructure.Commands.GetListOfBooks
 {
-	public class GetListOfBooksQueryHandler : QueryHandler<PagedQuery, OperationResultPaged>
+	public class GetListOfBooksQueryHandler : QueryHandler<GetListOfBooksQuery, OperationResultPaged>
 	{
 		public GetListOfBooksQueryHandler(ILogger<GetListOfBooksQueryHandler> logger, IMapper mapper, IAppDbContext context) : base(logger, mapper, context)
 		{ }
 
-		public override async Task<OperationResultPaged> Handle(PagedQuery request, CancellationToken cancellationToken)
+		public override async Task<OperationResultPaged> Handle(GetListOfBooksQuery request, CancellationToken cancellationToken)
 		{
 			var bookDtos = await _context.Books
 				.Skip(request.Index * request.PageSize)

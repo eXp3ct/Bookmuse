@@ -3,17 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.MainService", "Expect.Bookmuse.MainService\Expect.Bookmuse.MainService.csproj", "{B2187C29-9A25-48C1-81A0-2D94F4D7AE75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expect.Bookmuse.MainService", "Expect.Bookmuse.MainService\Expect.Bookmuse.MainService.csproj", "{B2187C29-9A25-48C1-81A0-2D94F4D7AE75}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{31D648A3-CCB1-45A6-A9C7-42FC390246C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.Domain", "Expect.Bookmuse.Domain\Expect.Bookmuse.Domain.csproj", "{A8F080E8-D8AA-425D-B1ED-ABC5A390AB87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expect.Bookmuse.Domain", "Expect.Bookmuse.Domain\Expect.Bookmuse.Domain.csproj", "{A8F080E8-D8AA-425D-B1ED-ABC5A390AB87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.Infrastructure", "Expect.Bookmuse.Infrastructure\Expect.Bookmuse.Infrastructure.csproj", "{CE20C63B-39C5-454C-8EA0-7BB67D28E566}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expect.Bookmuse.Infrastructure", "Expect.Bookmuse.Infrastructure\Expect.Bookmuse.Infrastructure.csproj", "{CE20C63B-39C5-454C-8EA0-7BB67D28E566}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.Data", "Expect.Bookmuse.Data\Expect.Bookmuse.Data.csproj", "{75814868-DABF-4924-B482-387245F77D9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expect.Bookmuse.Data", "Expect.Bookmuse.Data\Expect.Bookmuse.Data.csproj", "{75814868-DABF-4924-B482-387245F77D9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.CrudService", "Expect.Bookmuse.CrudService\Expect.Bookmuse.CrudService.csproj", "{31F99182-F4FB-4657-810E-36AD89C7DD14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expect.Bookmuse.CrudService", "Expect.Bookmuse.CrudService\Expect.Bookmuse.CrudService.csproj", "{31F99182-F4FB-4657-810E-36AD89C7DD14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.UI", "Expect.Bookmuse.UI\Expect.Bookmuse.UI.csproj", "{6BA7A540-5160-42FC-9287-4AE851AE36F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{50B14C90-088F-439D-AC4C-C3E4A84B811B}"
+	ProjectSection(SolutionItems) = preProject
+		rabbitmqconfig.json = rabbitmqconfig.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.GetService", "Expect.Bookmuse.GetService\Expect.Bookmuse.GetService.csproj", "{25AD2423-0EAA-40F6-8BB8-1FE7972EE141}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +54,14 @@ Global
 		{31F99182-F4FB-4657-810E-36AD89C7DD14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31F99182-F4FB-4657-810E-36AD89C7DD14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31F99182-F4FB-4657-810E-36AD89C7DD14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BA7A540-5160-42FC-9287-4AE851AE36F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA7A540-5160-42FC-9287-4AE851AE36F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA7A540-5160-42FC-9287-4AE851AE36F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA7A540-5160-42FC-9287-4AE851AE36F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25AD2423-0EAA-40F6-8BB8-1FE7972EE141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25AD2423-0EAA-40F6-8BB8-1FE7972EE141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25AD2423-0EAA-40F6-8BB8-1FE7972EE141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25AD2423-0EAA-40F6-8BB8-1FE7972EE141}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

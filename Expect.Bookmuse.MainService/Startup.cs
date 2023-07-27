@@ -1,4 +1,7 @@
-﻿namespace Expect.Bookmuse.MainService
+﻿using Expect.Bookmuse.Domain;
+using MassTransit;
+
+namespace Expect.Bookmuse.MainService
 {
 	public class Startup
 	{
@@ -32,6 +35,22 @@
 			services.AddControllers();
 			services.AddEndpointsApiExplorer();
 			services.AddSwaggerGen();
+
+			services.AddMassTransit(x =>
+			{
+				x.SetKebabCaseEndpointNameFormatter();
+				x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+				{
+					var rabbitMqConfig = Configuration.GetSection("RabbitMqConfig")
+									   .Get<RabbitMqConfigurator>();
+
+					cfg.Host(rabbitMqConfig.Host, "/", h =>
+					{
+						h.Username(rabbitMqConfig.Username);
+						h.Password(rabbitMqConfig.Password);
+					});
+				}));
+			});
 		}
 	}
 }

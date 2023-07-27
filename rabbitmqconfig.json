@@ -1,0 +1,7 @@
+{
+  "RabbitMqConfig": {
+    "Host": "rabbitmq",
+    "Username": "root",
+    "Password":  "root"
+  }
+}

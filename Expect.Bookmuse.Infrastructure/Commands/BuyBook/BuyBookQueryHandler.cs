@@ -7,13 +7,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Expect.Bookmuse.Infrastructure.Commands.BuyBook
 {
-	public class BuyBookQueryHandler : QueryHandler<IdQuery, OperationResult>
+	public class BuyBookQueryHandler : QueryHandler<BuyBookQuery, OperationResult>
 	{
 		public BuyBookQueryHandler(ILogger<QueryHandlerBase> logger, IMapper mapper, IAppDbContext context) : base(logger, mapper, context)
 		{
 		}
 
-		public override async Task<OperationResult> Handle(IdQuery request, CancellationToken cancellationToken)
+		public override async Task<OperationResult> Handle(BuyBookQuery request, CancellationToken cancellationToken)
 		{
 			var book = await _context.Books
 				.FindAsync(new object?[] { request.Id, cancellationToken }, cancellationToken: cancellationToken);

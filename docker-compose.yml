@@ -50,11 +50,39 @@ services:
 
     expect.bookmuse.crudservice:
         image: ${DOCKER_REGISTRY-}expectbookmusecrudservice
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
         container_name: crud-service
         build:
             context: .
             dockerfile: Expect.Bookmuse.CrudService/Dockerfile
+        networks:
+            - network
+
+    expect.bookmuse.ui:
+        image: ${DOCKER_REGISTRY-}expectbookmuseui
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        container_name: ui
+        build:
+            context: .
+            dockerfile: Expect.Bookmuse.UI/Dockerfile
+        networks:
+            - network
+
+    expect.bookmuse.getservice:
+        image: ${DOCKER_REGISTRY-}expectbookmusegetservice
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        container_name: get-service
+        build:
+            context: .
+            dockerfile: Expect.Bookmuse.GetService/Dockerfile
+        networks:
+            - network
 
 networks:
     network:
         driver: bridge
+
+

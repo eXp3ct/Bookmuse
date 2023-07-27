@@ -7,13 +7,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Expect.Bookmuse.Infrastructure.Commands.DeleteBook
 {
-	public class DeleteBookQueryHandler : QueryHandler<IdQuery, OperationResult>
+	public class DeleteBookQueryHandler : QueryHandler<DeleteBookQuery, OperationResult>
 	{
 		public DeleteBookQueryHandler(ILogger<DeleteBookQueryHandler> logger, IMapper mapper, IAppDbContext context) : base(logger, mapper, context)
 		{
 		}
 
-		public override async Task<OperationResult> Handle(IdQuery request, CancellationToken cancellationToken)
+		public override async Task<OperationResult> Handle(DeleteBookQuery request, CancellationToken cancellationToken)
 		{
 			var book = await _context.Books
 				.FindAsync(new object?[] { request.Id, cancellationToken }, cancellationToken: cancellationToken);
