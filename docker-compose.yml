@@ -1,0 +1,60 @@
+version: '3.4'
+
+services:
+    expect.bookmuse.mainservice:
+        container_name: main-service
+        image: ${DOCKER_REGISTRY-}expectbookmusemainservice
+        build:
+            context: .
+            dockerfile: Expect.Bookmuse.MainService/Dockerfile
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        networks:
+            - network
+    
+    postgres:
+        container_name: postgres
+        image: postgres:15
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=root
+        networks:
+            - network
+    
+    pgadmin:
+        container_name: pgadmin
+        image: dpage/pgadmin4
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=exp3ct@yandex.ru
+            - PGADMIN_DEFAULT_PASSWORD=admin
+        ports:
+            - 5050:80
+        networks:
+            - network
+    
+    rabbitmq:
+        container_name: rabbitmq
+        image: rabbitmq:3-management
+        hostname: rabbitmq
+        restart: always
+        environment:
+            - RABBITMQ_DEFAULT_USER=root
+            - RABBITMQ_DEFAULT_PASS=root
+        ports:
+            - 8080:15672
+        networks:
+            - network
+
+
+    expect.bookmuse.crudservice:
+        image: ${DOCKER_REGISTRY-}expectbookmusecrudservice
+        container_name: crud-service
+        build:
+            context: .
+            dockerfile: Expect.Bookmuse.CrudService/Dockerfile
+
+networks:
+    network:
+        driver: bridge

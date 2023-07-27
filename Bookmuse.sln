@@ -5,6 +5,16 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.MainService", "Expect.Bookmuse.MainService\Expect.Bookmuse.MainService.csproj", "{B2187C29-9A25-48C1-81A0-2D94F4D7AE75}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{31D648A3-CCB1-45A6-A9C7-42FC390246C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.Domain", "Expect.Bookmuse.Domain\Expect.Bookmuse.Domain.csproj", "{A8F080E8-D8AA-425D-B1ED-ABC5A390AB87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.Infrastructure", "Expect.Bookmuse.Infrastructure\Expect.Bookmuse.Infrastructure.csproj", "{CE20C63B-39C5-454C-8EA0-7BB67D28E566}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.Data", "Expect.Bookmuse.Data\Expect.Bookmuse.Data.csproj", "{75814868-DABF-4924-B482-387245F77D9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.CrudService", "Expect.Bookmuse.CrudService\Expect.Bookmuse.CrudService.csproj", "{31F99182-F4FB-4657-810E-36AD89C7DD14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,26 @@ Global
 		{B2187C29-9A25-48C1-81A0-2D94F4D7AE75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2187C29-9A25-48C1-81A0-2D94F4D7AE75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2187C29-9A25-48C1-81A0-2D94F4D7AE75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31D648A3-CCB1-45A6-A9C7-42FC390246C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31D648A3-CCB1-45A6-A9C7-42FC390246C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31D648A3-CCB1-45A6-A9C7-42FC390246C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31D648A3-CCB1-45A6-A9C7-42FC390246C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F080E8-D8AA-425D-B1ED-ABC5A390AB87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F080E8-D8AA-425D-B1ED-ABC5A390AB87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F080E8-D8AA-425D-B1ED-ABC5A390AB87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F080E8-D8AA-425D-B1ED-ABC5A390AB87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE20C63B-39C5-454C-8EA0-7BB67D28E566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE20C63B-39C5-454C-8EA0-7BB67D28E566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE20C63B-39C5-454C-8EA0-7BB67D28E566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE20C63B-39C5-454C-8EA0-7BB67D28E566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75814868-DABF-4924-B482-387245F77D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75814868-DABF-4924-B482-387245F77D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75814868-DABF-4924-B482-387245F77D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75814868-DABF-4924-B482-387245F77D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F99182-F4FB-4657-810E-36AD89C7DD14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F99182-F4FB-4657-810E-36AD89C7DD14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F99182-F4FB-4657-810E-36AD89C7DD14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F99182-F4FB-4657-810E-36AD89C7DD14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
