@@ -21,13 +21,13 @@ namespace Expect.Bookmuse.Infrastructure.Commands.GetBooksByProperties
 
 			var matchingBooks = await _context.Books
 				.Where(books =>
-					books.Name.Contains(bookInfo.Name) || 
-					books.Author.Contains(bookInfo.Author) ||
+					books.Name == bookInfo.Name || 
+					books.Author == bookInfo.Author ||
 					books.ReleaseDate == bookInfo.ReleaseDate ||
-					books.Genres.SequenceEqual(bookInfo.Genres) || 
-					books.Publisher.Contains(bookInfo.Publisher) || 
-					books.Volume.Contains(bookInfo.Volume))
-				.Skip(request.Index * request.PageSize)
+					books.Genres == bookInfo.Genres || 
+					books.Publisher == bookInfo.Publisher || 
+					books.Volume == bookInfo.Volume)
+				.Skip(request.Page * request.PageSize)
 				.Take(request.PageSize)
 				.ProjectTo<BookDto>(_mapper.ConfigurationProvider)
 				.ToListAsync(cancellationToken);
@@ -35,7 +35,7 @@ namespace Expect.Bookmuse.Infrastructure.Commands.GetBooksByProperties
 			var operationResult = new OperationResultPaged
 			{
 				Data = matchingBooks,
-				Index = request.Index,
+				Page = request.Page,
 				PageSize = request.PageSize
 			};
 

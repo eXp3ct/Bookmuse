@@ -1,4 +1,5 @@
 using Expect.Bookmuse.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Expect.Bookmuse.CrudService
 {
@@ -10,7 +11,7 @@ namespace Expect.Bookmuse.CrudService
 
 			var services = host.Services.CreateScope();
 			var context = services.ServiceProvider.GetRequiredService<AppDbContext>();
-			context.Database.EnsureCreated();
+			context.Database.Migrate();
 
 			host.Run();
 		}

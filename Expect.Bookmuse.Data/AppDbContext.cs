@@ -2,6 +2,7 @@
 using Expect.Bookmuse.Infrastructure.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Expect.Bookmuse.Data.Seeding;
 
 namespace Expect.Bookmuse.Data
 {
@@ -16,6 +17,7 @@ namespace Expect.Bookmuse.Data
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+			SeedData.Seed(modelBuilder);
 			base.OnModelCreating(modelBuilder);
 		}
 	}

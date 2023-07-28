@@ -7,7 +7,7 @@ namespace Expect.Bookmuse.Infrastructure.Common.Validation
 	{
 		public PagedQueryValidator()
 		{
-			RuleFor(x => x.Index).NotEmpty().GreaterThanOrEqualTo(0);
+			RuleFor(x => x.Page).NotEmpty().GreaterThanOrEqualTo(0);
 			RuleFor(x => x.PageSize).NotEmpty().GreaterThanOrEqualTo(1);
 		}
 	}

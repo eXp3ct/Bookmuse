@@ -28,6 +28,7 @@ namespace Expect.Bookmuse.GetService
 			{
 				x.SetKebabCaseEndpointNameFormatter();
 				x.AddConsumer<GetListOfBookConsumer>();
+				x.AddConsumer<GetBooksByPropertiesConsumer>();
 
 				x.UsingRabbitMq((context, configuration) =>
 				{

@@ -17,8 +17,9 @@ namespace Expect.Bookmuse.Infrastructure.Commands.GetListOfBooks
 		public override async Task<OperationResultPaged> Handle(GetListOfBooksQuery request, CancellationToken cancellationToken)
 		{
 			var bookDtos = await _context.Books
-				.Skip(request.Index * request.PageSize)
+				.Skip(request.Page * request.PageSize)
 				.Take(request.PageSize)
+				.OrderBy(x => x.Id)
 				.ProjectTo<BookDto>(_mapper.ConfigurationProvider)
 				.ToListAsync(cancellationToken);
 
@@ -28,7 +29,7 @@ namespace Expect.Bookmuse.Infrastructure.Commands.GetListOfBooks
 			return new OperationResultPaged
 				{
 					Data = bookDtos,
-					Index = request.Index,
+					Page = request.Page,
 					PageSize = request.PageSize
 				};
 		}
