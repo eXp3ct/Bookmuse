@@ -4,11 +4,12 @@ using Expect.Bookmuse.Infrastructure.Commands.GetBooksByProperties;
 using Expect.Bookmuse.Infrastructure.Commands.GetListOfBooks;
 using Expect.Bookmuse.MainService.Controllers.Base;
 using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Expect.Bookmuse.MainService.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("[controller]")]
 	public class GetBooksController : BaseController
 	{
 		public GetBooksController(ILogger<BaseController> logger, IBus bus) : base(logger, bus)
@@ -17,6 +18,7 @@ namespace Expect.Bookmuse.MainService.Controllers
 
 		[HttpGet]
 		[Route("/getbooks")]
+		[AllowAnonymous]
 		public async Task<IActionResult> GetListOfBooks(int page, int pageSize)
 		{
 			var query = new GetListOfBooksQuery()
@@ -27,8 +29,11 @@ namespace Expect.Bookmuse.MainService.Controllers
 			_logger.LogInformation($"GetListOfBooksQuery has been sent to bus");
 
 			var response = await _bus.Request<GetListOfBooksQuery, OperationResultPaged>(query);
-
-			_logger.LogInformation($"Returned an operation result for GetListOfBooksQuery");
+            if (!response.Message.Success)
+            {
+                return BadRequest(response.Message);
+            }
+            _logger.LogInformation($"Returned an operation result for GetListOfBooksQuery");
 			return Ok(response.Message);
 		}
 
@@ -39,7 +44,10 @@ namespace Expect.Bookmuse.MainService.Controllers
 			_logger.LogInformation("GetBooksByPropertiesQuery has been sent to bus");
 
 			var response = await _bus.Request<GetBooksByPropertiesQuery, OperationResultPaged>(query);
-
+			if (!response.Message.Success)
+			{
+				return BadRequest(response.Message);
+			}
 			_logger.LogInformation($"Returned an operation result for GetListOfBooksQuery");
 
 			return Ok(response.Message);
@@ -56,7 +64,10 @@ namespace Expect.Bookmuse.MainService.Controllers
 
 			_logger.LogInformation("GetBookQuery has been sent to bus");
 			var response = await _bus.Request<GetBookQuery, OperationResult>(query);
-
+			if (!response.Message.Success)
+			{
+				return BadRequest(response.Message);
+			}
 			_logger.LogInformation("Returned an operation result for GetBookQuery");
 
 			return Ok(response.Message);	

@@ -1,0 +1,33 @@
+﻿@page
+@model Expect.Bookmuse.UI.Pages.BooksListModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+@{
+	ViewData["Title"] = "Books";
+}
+
+<table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th>Id</th>
+			<th>ShelfId</th>
+			<th>Name</th>
+			<th>Author</th>
+			<th>Release Date</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var book in Model.Books)
+		{
+			<tr>
+				<td>@book.Id</td>
+				<td>@book.ShelfId</td>
+				<td>@book.Name</td>
+				<td>@book.Author</td>
+				<td>@book.ReleaseDate.ToString()</td>
+				<td>@book.Price</td>
+				<td><a asp-area="" asp-page="/Book" asp-route-id="@book.Id">Look</a></td>
+			</tr>
+		}
+	</tbody>
+</table>

@@ -1,0 +1,36 @@
+﻿@page 
+@using Expect.Bookmuse.Domain.Enums;
+@model Expect.Bookmuse.UI.Pages.BookModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+@{
+	ViewData["Title"] = "Book";
+}
+
+<div class="text-center">
+    <table class="table">
+        <tbody>
+            @foreach (var property in Model.Book.GetType().GetProperties().OrderBy(x => x.Name))
+            {
+                <tr>
+                    <td>@property.Name</td>
+                    <td>
+                        @if (property.PropertyType == typeof(List<Genre>))
+                        {
+                            var genres = (List<Genre>)property.GetValue(Model.Book);
+                            for (var i = 0; i < genres.Count; i++)
+                            {
+                                <span>@genres[i]</span>
+
+                                @(i < genres.Count - 1 ? ", " : "")
+                            }
+                        }
+                        else
+                        {
+                            @property.GetValue(Model.Book)
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

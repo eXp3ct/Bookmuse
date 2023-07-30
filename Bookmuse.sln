@@ -15,14 +15,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expect.Bookmuse.Data", "Exp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expect.Bookmuse.CrudService", "Expect.Bookmuse.CrudService\Expect.Bookmuse.CrudService.csproj", "{31F99182-F4FB-4657-810E-36AD89C7DD14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.UI", "Expect.Bookmuse.UI\Expect.Bookmuse.UI.csproj", "{6BA7A540-5160-42FC-9287-4AE851AE36F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expect.Bookmuse.UI", "Expect.Bookmuse.UI\Expect.Bookmuse.UI.csproj", "{6BA7A540-5160-42FC-9287-4AE851AE36F0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{50B14C90-088F-439D-AC4C-C3E4A84B811B}"
 	ProjectSection(SolutionItems) = preProject
 		rabbitmqconfig.json = rabbitmqconfig.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expect.Bookmuse.GetService", "Expect.Bookmuse.GetService\Expect.Bookmuse.GetService.csproj", "{25AD2423-0EAA-40F6-8BB8-1FE7972EE141}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expect.Bookmuse.GetService", "Expect.Bookmuse.GetService\Expect.Bookmuse.GetService.csproj", "{25AD2423-0EAA-40F6-8BB8-1FE7972EE141}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

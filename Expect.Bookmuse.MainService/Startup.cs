@@ -23,6 +23,12 @@ namespace Expect.Bookmuse.MainService
 			app.UseHttpsRedirection();
 			app.UseRouting();
 			app.UseAuthorization();
+			app.UseCors(policeBuilder =>
+			{
+				policeBuilder.AllowAnyHeader();
+				policeBuilder.AllowAnyOrigin();
+				policeBuilder.AllowAnyMethod();
+			});
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();

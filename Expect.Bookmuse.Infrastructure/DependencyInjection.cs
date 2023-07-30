@@ -13,7 +13,7 @@ namespace Expect.Bookmuse.Infrastructure
 		{
 			services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 			services.AddAutoMapper(Assembly.GetExecutingAssembly());
-			services.AddValidatorsFromAssemblyContaining<PagedQueryValidator>();
+			services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 			return services;
