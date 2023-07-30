@@ -1,4 +1,5 @@
 ﻿using Expect.Bookmuse.Domain;
+using Expect.Bookmuse.Domain.Interfaces;
 using Expect.Bookmuse.Infrastructure.Commands.AddBook;
 using Expect.Bookmuse.Infrastructure.Commands.BuyBook;
 using Expect.Bookmuse.Infrastructure.Commands.DeleteBook;
@@ -22,7 +23,7 @@ namespace Expect.Bookmuse.MainService.Controllers
 		public async Task<IActionResult> AddBook([FromBody] AddBookQuery query)
 		{
 			_logger.LogInformation("AddBookQuery has been sent to bus");
-			var response = await _bus.Request<AddBookQuery, OperationResult>(query);
+			var response = await _bus.Request<AddBookQuery, IOperationResult>(query);
 
 			_logger.LogInformation("Returned an operation result for AddBookQuery");
 			if (!response.Message.Success)
@@ -37,7 +38,7 @@ namespace Expect.Bookmuse.MainService.Controllers
 		public async Task<IActionResult> BuyBook([FromBody] BuyBookQuery query)
 		{
 			_logger.LogInformation("BuyBookQuery has been sent to bus");
-			var response = await _bus.Request<BuyBookQuery, OperationResult>(query);
+			var response = await _bus.Request<BuyBookQuery, IOperationResult>(query);
 			if (!response.Message.Success)
 			{
 				return BadRequest(response.Message);
@@ -51,7 +52,7 @@ namespace Expect.Bookmuse.MainService.Controllers
 		public async Task<IActionResult> DeleteBook([FromBody] DeleteBookQuery query)
 		{
 			_logger.LogInformation("DeleteBookQuery has been sent to bus");
-			var response = await _bus.Request<DeleteBookQuery, OperationResult>(query);
+			var response = await _bus.Request<DeleteBookQuery, IOperationResult>(query);
 			if (!response.Message.Success)
 			{
 				return BadRequest(response.Message);
@@ -66,7 +67,7 @@ namespace Expect.Bookmuse.MainService.Controllers
 		public async Task<IActionResult> UpdateBook([FromBody] UpdateBookQuery query)
 		{
 			_logger.LogInformation("UpdateBookQuery has been sent to bus");
-			var response = await _bus.Request<UpdateBookQuery, OperationResult>(query);
+			var response = await _bus.Request<UpdateBookQuery, IOperationResult>(query);
 			if (!response.Message.Success)
 			{
 				return BadRequest(response.Message);

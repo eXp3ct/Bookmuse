@@ -1,4 +1,5 @@
 ﻿using Expect.Bookmuse.Domain;
+using Expect.Bookmuse.Domain.Interfaces;
 using Expect.Bookmuse.Infrastructure.Commands.GetBook;
 using Expect.Bookmuse.Infrastructure.Commands.GetBooksByProperties;
 using Expect.Bookmuse.Infrastructure.Commands.GetListOfBooks;
@@ -26,9 +27,9 @@ namespace Expect.Bookmuse.MainService.Controllers
 				Page = page,
 				PageSize = pageSize
 			};
-			_logger.LogInformation($"GetListOfBooksQuery has been sent to bus");
+			_logger.LogInformation($"GetListOfBooksQuery has been sent to bus {query.Page} | {query.PageSize}");
 
-			var response = await _bus.Request<GetListOfBooksQuery, OperationResultPaged>(query);
+			var response = await _bus.Request<GetListOfBooksQuery, IOperationResultPaged>(query);
             if (!response.Message.Success)
             {
                 return BadRequest(response.Message);
@@ -43,7 +44,7 @@ namespace Expect.Bookmuse.MainService.Controllers
 		{
 			_logger.LogInformation("GetBooksByPropertiesQuery has been sent to bus");
 
-			var response = await _bus.Request<GetBooksByPropertiesQuery, OperationResultPaged>(query);
+			var response = await _bus.Request<GetBooksByPropertiesQuery, IOperationResultPaged>(query);
 			if (!response.Message.Success)
 			{
 				return BadRequest(response.Message);
@@ -63,7 +64,7 @@ namespace Expect.Bookmuse.MainService.Controllers
 			};
 
 			_logger.LogInformation("GetBookQuery has been sent to bus");
-			var response = await _bus.Request<GetBookQuery, OperationResult>(query);
+			var response = await _bus.Request<GetBookQuery, IOperationResult>(query);
 			if (!response.Message.Success)
 			{
 				return BadRequest(response.Message);

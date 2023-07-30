@@ -13,12 +13,12 @@ namespace Expect.Bookmuse.UI.Pages
         {
 			//https://localhost:53991/getbooks?page=0&pageSize=10
 			//https://main-service:443/getbooks?page=0&pageSize=100
-			var clientHandler = new HttpClientHandler
+			using var clientHandler = new HttpClientHandler
 			{
 				ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
 			};
 			using var client = new HttpClient(clientHandler);
-            using var response = await client.GetAsync("https://main-service:443/getbooks?page=0&pageSize=100");
+            using var response = await client.GetAsync("https://main-service:443/getbooks?page=1&pageSize=100");
             var responseString = await response.Content.ReadAsStringAsync();
 
             if (string.IsNullOrEmpty(responseString))
@@ -26,5 +26,21 @@ namespace Expect.Bookmuse.UI.Pages
 
             Books = JsonConvert.DeserializeObject<OperationResultTest>(responseString)?.Data;
         }
+
+        public async Task<IActionResult> OnPostBuyBookAsync(Guid id)
+        {
+			using var clientHandler = new HttpClientHandler
+			{
+				ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+			};
+			using var client = new HttpClient(clientHandler);
+            var content = new HttpRequestMessage(HttpMethod.Post,"https://main-service:443/buybook")
+            {
+                Content = new StringContent($"id:{id}", System.Text.Encoding.UTF8, "application/json")
+            };
+            using var response = await client.SendAsync(content);
+
+            return RedirectToPage();
+		}
     }
 }

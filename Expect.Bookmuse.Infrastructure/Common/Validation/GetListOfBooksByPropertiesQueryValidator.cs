@@ -13,7 +13,7 @@ namespace Expect.Bookmuse.Infrastructure.Common.Validation
     {
         public GetListOfBooksByPropertiesQueryValidator()
         {
-            RuleFor(x => x.Page).NotEmpty().GreaterThanOrEqualTo(0);
+            RuleFor(x => x.Page).NotEmpty().GreaterThanOrEqualTo(1);
             RuleFor(x => x.PageSize).NotEmpty().GreaterThanOrEqualTo(1);
         }
     }

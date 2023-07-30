@@ -1,4 +1,5 @@
 ﻿using Expect.Bookmuse.Domain;
+using Expect.Bookmuse.Domain.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Expect.Bookmuse.Infrastructure.Commands.Common
 {
-	public class IdQuery : IRequest<OperationResult>
+	public class IdQuery : IRequest<IOperationResult>
 	{
 		public Guid Id { get; set; }
 	}

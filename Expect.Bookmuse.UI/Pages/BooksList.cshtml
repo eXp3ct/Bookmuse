@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach(var book in Model.Books)
+		@foreach (var book in Model.Books)
 		{
 			<tr>
 				<td>@book.Id</td>
@@ -27,6 +27,12 @@
 				<td>@book.ReleaseDate.ToString()</td>
 				<td>@book.Price</td>
 				<td><a asp-area="" asp-page="/Book" asp-route-id="@book.Id">Look</a></td>
+				<td>
+					<form method="post" asp-page-handler="BuyBook">
+						@*<button type="submit" asp-page="/BookList" asp-page-handler="BuyBook" class="btn btn-primary">Buy</button>*@
+						<input type="submit" asp-page="/BookList" asp-page-handler="BuyBook" type="hidden" name="id" value="@book.Id" />
+					</form>
+				</td>
 			</tr>
 		}
 	</tbody>

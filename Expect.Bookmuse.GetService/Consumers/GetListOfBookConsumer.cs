@@ -8,12 +8,12 @@ namespace Expect.Bookmuse.GetService.Consumers
 {
 	public class GetListOfBookConsumer : ConsumerBase<GetListOfBooksQuery>
 	{
-		public GetListOfBookConsumer(IMediator mediator) : base(mediator)
-		{
-		}
+        public GetListOfBookConsumer(IMediator mediator) : base(mediator)
+        {
+            
+        }
 
-
-		public override async Task Consume(ConsumeContext<GetListOfBooksQuery> context)
+        public override async Task Consume(ConsumeContext<GetListOfBooksQuery> context)
 		{
 			var response = await _mediator.Send(context.Message);
 

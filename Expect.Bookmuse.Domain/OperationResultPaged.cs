@@ -1,6 +1,8 @@
-﻿namespace Expect.Bookmuse.Domain
+﻿using Expect.Bookmuse.Domain.Interfaces;
+
+namespace Expect.Bookmuse.Domain
 {
-	public class OperationResultPaged : OperationResult
+	public class OperationResultPaged : OperationResult, IOperationResultPaged
 	{
 		public int Page { get; set; }
 		public int PageSize { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Expect.Bookmuse.Infrastructure.Common.Behavior;
+using Expect.Bookmuse.Infrastructure.Common.Builders;
 using Expect.Bookmuse.Infrastructure.Common.Validation;
 using FluentValidation;
 using MediatR;
@@ -15,6 +16,7 @@ namespace Expect.Bookmuse.Infrastructure
 			services.AddAutoMapper(Assembly.GetExecutingAssembly());
 			services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+			services.AddTransient<IOperationResultBuilder, OperationResultBuilder>();
 
 			return services;
 		}

@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using Expect.Bookmuse.Domain;
+using Expect.Bookmuse.Domain.Interfaces;
 using Expect.Bookmuse.Infrastructure.Commands.Common;
+using Expect.Bookmuse.Infrastructure.Commands.Common.Base;
+using Expect.Bookmuse.Infrastructure.Common.Builders;
 using Expect.Bookmuse.Infrastructure.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -8,13 +11,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Expect.Bookmuse.Infrastructure.Commands.AddBook
 {
-	public class AddBookQueryHandler : QueryHandler<AddBookQuery, OperationResult>
+	public class AddBookQueryHandler : QueryHandler<AddBookQuery, IOperationResult>
 	{
-		public AddBookQueryHandler(ILogger<AddBookQueryHandler> logger, IMapper mapper, IAppDbContext context) : base(logger, mapper, context)
-		{
-		}
+        public AddBookQueryHandler(ILogger<QueryHandlerBase> logger, IMapper mapper, IAppDbContext context, IOperationResultBuilder builder) : base(logger, mapper, context, builder)
+        {
+        }
 
-		public override async Task<OperationResult> Handle(AddBookQuery request, CancellationToken cancellationToken)
+        public override async Task<IOperationResult> Handle(AddBookQuery request, CancellationToken cancellationToken)
 		{
 			var book = _mapper.Map<Book>(request.BookInfo);
 			var shelves = await _context.Shelves
@@ -28,10 +31,9 @@ namespace Expect.Bookmuse.Infrastructure.Commands.AddBook
 
 			_logger.LogInformation($"Book with id {book.Id} saved to database");
 
-			return new OperationResult
-			{
-				Data = book
-			};
+			return _builder
+				.AddData(book)
+				.Build();
 		}
 	}
 }

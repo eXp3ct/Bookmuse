@@ -1,6 +1,8 @@
-﻿namespace Expect.Bookmuse.Domain
+﻿using Expect.Bookmuse.Domain.Interfaces;
+
+namespace Expect.Bookmuse.Domain
 {
-	public class OperationResult
+	public class OperationResult : IOperationResult
 	{
 		public object? Data { get; set; }
 		public bool Success { get; set; } = true;
