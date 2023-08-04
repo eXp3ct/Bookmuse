@@ -1,5 +1,6 @@
 ﻿using Expect.Bookmuse.Domain;
 using MassTransit;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Expect.Bookmuse.MainService
 {
@@ -20,15 +21,16 @@ namespace Expect.Bookmuse.MainService
 				app.UseSwaggerUI();
 			}
 
-			app.UseHttpsRedirection();
+			//app.UseHttpsRedirection();
 			app.UseRouting();
+			app.UseAuthentication();
 			app.UseAuthorization();
-			app.UseCors(policeBuilder =>
-			{
-				policeBuilder.AllowAnyHeader();
-				policeBuilder.AllowAnyOrigin();
-				policeBuilder.AllowAnyMethod();
-			});
+			//app.UseCors(policeBuilder =>
+			//{
+			//	policeBuilder.AllowAnyHeader();
+			//	policeBuilder.AllowAnyOrigin();
+			//	policeBuilder.AllowAnyMethod();
+			//});
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
@@ -40,7 +42,7 @@ namespace Expect.Bookmuse.MainService
 		{
 			services.AddControllers();
 			services.AddEndpointsApiExplorer();
-			services.AddSwaggerGen();
+			SwaggerConfiguration.Configure(services);
 
 			services.AddMassTransit(x =>
 			{
@@ -57,6 +59,23 @@ namespace Expect.Bookmuse.MainService
 					});
 				}));
 			});
+
+			// Добавляем аутентификацию с помощью токенов
+			services.AddAuthentication("Bearer")
+				.AddJwtBearer("Bearer", options =>
+				{
+					options.Authority = "https://auth:443"; // URL вашего IdentityServer
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						ValidateAudience = false // Отключаем проверку аудитории, так как она не используется в IdentityServer4 по умолчанию
+					};
+
+					// Отключаем проверку SSL соединения
+					options.BackchannelHttpHandler = new HttpClientHandler
+					{
+						ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+					};
+				});
 		}
 	}
 }

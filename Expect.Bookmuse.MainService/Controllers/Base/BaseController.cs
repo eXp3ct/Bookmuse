@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Expect.Bookmuse.MainService.Controllers.Base
 {
-	[ApiController]
-	public abstract class BaseController : Controller
+
+	public abstract class BaseController : ControllerBase
 	{
 		protected readonly ILogger<BaseController> _logger;
 		protected readonly IBus _bus;

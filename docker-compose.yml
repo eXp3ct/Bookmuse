@@ -81,8 +81,20 @@ services:
         networks:
             - network
 
+    expect.bookmuse.auth:
+        container_name: auth
+        image: ${DOCKER_REGISTRY-}expectbookmuseauth
+        build:
+            context: .
+            dockerfile: Expect.Bookmuse.Auth/Dockerfile
+        networks:
+            - network
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+
 networks:
     network:
         driver: bridge
+
 
 

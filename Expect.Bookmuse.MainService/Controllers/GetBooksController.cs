@@ -7,19 +7,36 @@ using Expect.Bookmuse.MainService.Controllers.Base;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace Expect.Bookmuse.MainService.Controllers
 {
-	[Route("[controller]")]
+	/// <summary>
+	/// Контроллер для получения книг
+	/// </summary>
+	[Route("api/[controller]")]
+	[Authorize]
+	[ApiController]
 	public class GetBooksController : BaseController
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="logger"></param>
+		/// <param name="bus"></param>
 		public GetBooksController(ILogger<BaseController> logger, IBus bus) : base(logger, bus)
 		{
 		}
 
+		/// <summary>
+		/// Получение списка всех книг
+		/// </summary>
+		/// <param name="page">Страница</param>
+		/// <param name="pageSize">Размер страницы</param>
+		/// <returns>Список книг</returns>
 		[HttpGet]
-		[Route("/getbooks")]
-		[AllowAnonymous]
+		[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(OperationResultPaged))]
+		[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(OperationResultPaged))]
 		public async Task<IActionResult> GetListOfBooks(int page, int pageSize)
 		{
 			var query = new GetListOfBooksQuery()
@@ -38,8 +55,14 @@ namespace Expect.Bookmuse.MainService.Controllers
 			return Ok(response.Message);
 		}
 
+		/// <summary>
+		/// Получение списка книг по какому то полю
+		/// </summary>
+		/// <param name="query">Поля по которым искать</param>
+		/// <returns>Список книг</returns>
 		[HttpPost]
-		[Route("/getbooks")]
+		[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(OperationResultPaged))]
+		[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(OperationResultPaged))]
 		public async Task<IActionResult> GetListOfBooksByProperties([FromBody] GetBooksByPropertiesQuery query)
 		{
 			_logger.LogInformation("GetBooksByPropertiesQuery has been sent to bus");
@@ -54,9 +77,17 @@ namespace Expect.Bookmuse.MainService.Controllers
 			return Ok(response.Message);
 		}
 
+
+		/// <summary>
+		/// Получение книги
+		/// </summary>
+		/// <param name="id">Id книги</param>
+		/// <returns>Книга</returns>
 		[HttpGet]
-		[Route("/getbook/{id}")]
-		public async Task<IActionResult> GetBook(Guid id)
+		[Route("{id}")]
+		[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(OperationResultPaged))]
+		[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(OperationResultPaged))]
+		public async Task<IActionResult> GetBook([FromRoute] Guid id)
 		{
 			var query = new GetBookQuery()
 			{
