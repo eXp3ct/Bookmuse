@@ -1,4 +1,6 @@
 
+using Serilog;
+
 namespace Expect.Bookmuse.MainService
 {
 	public class Program
@@ -12,9 +14,15 @@ namespace Expect.Bookmuse.MainService
 
 		public static IHostBuilder CreateHostBuilder(string[] args) => 
 			Host.CreateDefaultBuilder(args)
-			.ConfigureWebHostDefaults(builder => 
-			{
-				builder.UseStartup<Startup>();
-			});
+				.UseSerilog((context, config) =>
+				{
+					config
+						.MinimumLevel.Information()
+						.WriteTo.Console();
+				})
+				.ConfigureWebHostDefaults(builder => 
+				{
+					builder.UseStartup<Startup>();
+				});
 	}
 }

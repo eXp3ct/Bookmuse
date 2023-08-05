@@ -1,5 +1,6 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4.Test;
+using System.Security.Claims;
 
 namespace Expect.Bookmuse.Auth
 {
@@ -9,13 +10,13 @@ namespace Expect.Bookmuse.Auth
 		{
 			return new List<ApiResource>()
 			{
-				new ApiResource("getbooks", "GetBooks")
+				new ApiResource("getbooks", "Main Service GetBooks API")
 				{
-					Scopes = {"getbooks.read", "getbooks.write"}
+					Scopes = {"getbooks"}
 				},
-				new ApiResource("crud", "Crud")
+				new ApiResource("crud", "Main Service Crud API")
 				{
-					Scopes = {"crud.read", "crud.write"}
+					Scopes = {"crud"}
 				}
 			};
 		}
@@ -33,8 +34,8 @@ namespace Expect.Bookmuse.Auth
 		{
 			return new List<ApiScope>()
 			{
-				new ApiScope("getbooks", "GetBooks"),
-				new ApiScope("crud","Crud")
+				new ApiScope("getbooks", "Main Service GetBooks API"),
+				new ApiScope("crud","Main Service Crud API")
 			};
 		}
 
@@ -50,7 +51,15 @@ namespace Expect.Bookmuse.Auth
 					{
 						new Secret("admin_secret".Sha256())
 					},
-					AllowedScopes = {"getbooks", "crud"},
+					AllowedScopes = { "getbooks" , "crud" },
+					Claims =
+					{
+						new()
+						{
+							Type = "controller",
+							Value = "getbooks",
+						},
+					}
 				}
 			};
 		}

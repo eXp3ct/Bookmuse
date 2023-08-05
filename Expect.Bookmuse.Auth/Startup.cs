@@ -19,23 +19,20 @@ namespace Expect.Bookmuse.Auth
 		{
 			app.UseHttpsRedirection();
 			app.UseRouting();
-			app.UseAuthentication();
 			app.UseIdentityServer();
-			app.UseCors(builder =>
-			{
-				builder.AllowAnyOrigin();
-				builder.AllowAnyMethod();
-				builder.AllowAnyHeader();
-			});
 		}
 
 		public void ConfigureServices(IServiceCollection services)
 		{
 			// Добавляем и настраиваем IdentityServer
 			services.AddIdentityServer()
-				.AddInMemoryClients(IdentityServerConfig.GetClients()) // Метод, который будет содержать настройки для клиентов
+				.AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
+				.AddInMemoryClients(IdentityServerConfig.GetClients())
 				.AddInMemoryApiScopes(IdentityServerConfig.GetApiScopes())
-				.AddDeveloperSigningCredential();		
+				//.AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
+				.AddDeveloperSigningCredential();	
+			
+			services.AddAuthorization();
 		}
 	}
 }

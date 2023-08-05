@@ -6,6 +6,7 @@ using Expect.Bookmuse.Infrastructure.Commands.DeleteBook;
 using Expect.Bookmuse.Infrastructure.Commands.UpdateBook;
 using Expect.Bookmuse.MainService.Controllers.Base;
 using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 
@@ -15,6 +16,7 @@ namespace Expect.Bookmuse.MainService.Controllers
 	/// Операции CRUD для книг
 	/// </summary>
 	[Route("api/[controller]")]
+	[Authorize("getbooks")]
 	public class CrudController : BaseController
 	{
 		/// <summary>

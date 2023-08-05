@@ -1,5 +1,6 @@
 ﻿using Expect.Bookmuse.Domain;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Expect.Bookmuse.MainService
@@ -21,10 +22,10 @@ namespace Expect.Bookmuse.MainService
 				app.UseSwaggerUI();
 			}
 
-			//app.UseHttpsRedirection();
+			app.UseHttpsRedirection();
 			app.UseRouting();
-			app.UseAuthentication();
 			app.UseAuthorization();
+			app.UseAuthentication();
 			//app.UseCors(policeBuilder =>
 			//{
 			//	policeBuilder.AllowAnyHeader();
@@ -61,14 +62,11 @@ namespace Expect.Bookmuse.MainService
 			});
 
 			// Добавляем аутентификацию с помощью токенов
-			services.AddAuthentication("Bearer")
-				.AddJwtBearer("Bearer", options =>
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 				{
 					options.Authority = "https://auth:443"; // URL вашего IdentityServer
-					options.TokenValidationParameters = new TokenValidationParameters
-					{
-						ValidateAudience = false // Отключаем проверку аудитории, так как она не используется в IdentityServer4 по умолчанию
-					};
+					options.Audience = "getbooks";
 
 					// Отключаем проверку SSL соединения
 					options.BackchannelHttpHandler = new HttpClientHandler
@@ -76,6 +74,14 @@ namespace Expect.Bookmuse.MainService
 						ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
 					};
 				});
+
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy("getbooks", policy =>
+				{
+					policy.RequireClaim("client_controller", "getbooks");
+				});
+			});
 		}
 	}
 }

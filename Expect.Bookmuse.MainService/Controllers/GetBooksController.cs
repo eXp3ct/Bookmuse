@@ -15,7 +15,7 @@ namespace Expect.Bookmuse.MainService.Controllers
 	/// Контроллер для получения книг
 	/// </summary>
 	[Route("api/[controller]")]
-	[Authorize]
+	[Authorize("getbooks")]
 	[ApiController]
 	public class GetBooksController : BaseController
 	{
@@ -35,8 +35,8 @@ namespace Expect.Bookmuse.MainService.Controllers
 		/// <param name="pageSize">Размер страницы</param>
 		/// <returns>Список книг</returns>
 		[HttpGet]
-		[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(OperationResultPaged))]
-		[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(OperationResultPaged))]
+		[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(IOperationResultPaged))]
+		[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IOperationResultPaged))]
 		public async Task<IActionResult> GetListOfBooks(int page, int pageSize)
 		{
 			var query = new GetListOfBooksQuery()
@@ -61,8 +61,8 @@ namespace Expect.Bookmuse.MainService.Controllers
 		/// <param name="query">Поля по которым искать</param>
 		/// <returns>Список книг</returns>
 		[HttpPost]
-		[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(OperationResultPaged))]
-		[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(OperationResultPaged))]
+		[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(IOperationResultPaged))]
+		[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IOperationResultPaged))]
 		public async Task<IActionResult> GetListOfBooksByProperties([FromBody] GetBooksByPropertiesQuery query)
 		{
 			_logger.LogInformation("GetBooksByPropertiesQuery has been sent to bus");
@@ -85,8 +85,8 @@ namespace Expect.Bookmuse.MainService.Controllers
 		/// <returns>Книга</returns>
 		[HttpGet]
 		[Route("{id}")]
-		[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(OperationResultPaged))]
-		[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(OperationResultPaged))]
+		[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(IOperationResultPaged))]
+		[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IOperationResultPaged))]
 		public async Task<IActionResult> GetBook([FromRoute] Guid id)
 		{
 			var query = new GetBookQuery()
